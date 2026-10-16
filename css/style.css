@@ -582,10 +582,10 @@ button { font: inherit; color: inherit; cursor: pointer; }
   background: var(--sun-pale);
 }
 .link-cards {
-  width: min(900px, 100%);
+  width: min(620px, 100%);
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   position: relative;
   z-index: 2;
@@ -606,7 +606,6 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .link-card:hover { transform: translateY(-6px) rotate(-1.5deg); box-shadow: 0 14px 0 var(--c); }
 .lc-yt { --c: #FF4E45; }
 .lc-x { --c: #333; }
-.lc-tt { --c: #25C2C9; }
 .lc-icon {
   width: 72px; height: 72px;
   display: grid;
