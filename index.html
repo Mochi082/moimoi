@@ -218,6 +218,7 @@
       <h2 class="section-title"><span class="en">GALLERY</span>ギャラリー</h2>
       <p class="section-sub">タップすると大きく見られます</p>
 
+      <!-- 上がピックアップ、下（gallery-extra）がMOREで出てくる画像 -->
       <div class="gallery-grid">
         <button class="g-item reveal" data-src="images/site/g01.webp"><img src="images/site/g01.webp" alt="ひまわり畑と虹の空のもいもい" loading="lazy" width="904" height="1200"></button>
         <button class="g-item reveal" data-src="images/site/g07.webp"><img src="images/site/g07.webp" alt="花のドレスのもいもい" loading="lazy" width="841" height="1200"></button>
@@ -227,6 +228,9 @@
         <button class="g-item reveal" data-src="images/site/g06.webp"><img src="images/site/g06.webp" alt="赤いチャイナドレスのもいもい" loading="lazy" width="848" height="1200"></button>
         <button class="g-item reveal" data-src="images/site/g08.webp"><img src="images/site/g08.webp" alt="いちごパフェのもいもい" loading="lazy" width="1200" height="1200"></button>
         <button class="g-item reveal" data-src="images/site/g02.webp"><img src="images/site/g02.webp" alt="Vtuberフォロー祭りのプロフィール画像" loading="lazy" width="675" height="900"></button>
+      </div>
+
+      <div id="gallery-extra" class="gallery-grid gallery-extra">
         <button class="g-item reveal" data-src="images/site/g11.webp"><img src="images/site/g11.webp" alt="ひまわりの髪飾りと杖を持つもいもい" loading="lazy" width="983" height="1200"></button>
         <button class="g-item reveal" data-src="images/site/g09.webp"><img src="images/site/g09.webp" alt="雲の上で眠るもいもい" loading="lazy" width="1200" height="1200"></button>
         <button class="g-item reveal" data-src="images/site/g10.webp"><img src="images/site/g10.webp" alt="ハートと花柄の衣装のもいもい" loading="lazy" width="845" height="1200"></button>
@@ -245,6 +249,14 @@
         <button class="g-item reveal" data-src="images/site/g25.webp"><img src="images/site/g25.webp" alt="花飾りのもいもい" loading="lazy" width="850" height="1200"></button>
         <button class="g-item reveal" data-src="images/site/g26.webp"><img src="images/site/g26.webp" alt="ステッキを持つもいもい" loading="lazy" width="845" height="1200"></button>
         <button class="g-item reveal" data-src="images/site/g24.webp"><img src="images/site/g24.webp" alt="パーカーで眠るもいもい" loading="lazy" width="675" height="1200"></button>
+      </div>
+
+      <div class="gallery-more">
+        <button class="more-btn" aria-expanded="false" aria-controls="gallery-extra">
+          <svg aria-hidden="true"><use href="#sunflower"/></svg>
+          <span class="more-label">MORE</span>
+          <span class="more-sub">もっと見る</span>
+        </button>
       </div>
     </section>
 

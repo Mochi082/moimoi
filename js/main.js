@@ -60,10 +60,28 @@ if ("IntersectionObserver" in window && !reduceMotion) {
   reveals.forEach((el) => el.classList.add("is-in"));
 }
 
+// ---------- ギャラリーのMOREボタン ----------
+const galleryExtra = document.querySelector(".gallery-extra");
+const moreBtn = document.querySelector(".more-btn");
+const moreSub = moreBtn.querySelector(".more-sub");
+const moreLabel = moreBtn.querySelector(".more-label");
+const extraCount = galleryExtra.querySelectorAll(".g-item").length;
+
+moreSub.textContent = `もっと見る（+${extraCount}枚）`;
+
+moreBtn.addEventListener("click", () => {
+  const open = galleryExtra.classList.toggle("is-open");
+  moreBtn.setAttribute("aria-expanded", open);
+  moreLabel.textContent = open ? "CLOSE" : "MORE";
+  moreSub.textContent = open ? "とじる" : `もっと見る（+${extraCount}枚）`;
+  if (!open) document.getElementById("gallery").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+});
+
 // ---------- ギャラリーの拡大表示 ----------
 const lightbox = document.querySelector(".lightbox");
 const lbImg = lightbox.querySelector("img");
-const items = [...document.querySelectorAll(".g-item")];
+const allItems = [...document.querySelectorAll(".g-item")];
+let items = allItems;
 let current = 0;
 
 function show(index) {
@@ -73,9 +91,11 @@ function show(index) {
   lbImg.alt = img.alt;
 }
 
-items.forEach((item, i) =>
+allItems.forEach((item) =>
   item.addEventListener("click", () => {
-    show(i);
+    // 今見えている画像だけを前後に切り替える
+    items = allItems.filter((el) => el.offsetParent !== null);
+    show(items.indexOf(item));
     lightbox.showModal();
   })
 );
