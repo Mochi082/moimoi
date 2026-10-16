@@ -1,0 +1,11 @@
+# Photoshopのファイルは重いのでアップしない
+*.psd
+
+# 元画像は手元だけに置く（サイトには images/thumbs の軽量版を使う）
+images/gallery/
+
+# 使っていない画像（手元にだけ残す）
+images/site/
+
+# Pythonの一時ファイル
+__pycache__/

@@ -1,4 +1,4 @@
-// もいもい -FMmoimoi- 公式サイト
+// もいもい -FMmoimoi- 公式サイト（全ページ共通）
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -37,6 +37,68 @@ if (rain && !reduceMotion) {
   }
 }
 
+// ---------- ギャラリーを画像リストから組み立てる ----------
+// リストは tools/build_gallery.py が images/gallery から自動で作ります（js/gallery-data.js）
+//   data-show="pickup" … ピックアップだけ（トップページ）
+//   data-show="all"    … 全部（gallery.html）
+const galleryData = window.GALLERY || { pickup: [], more: [] };
+const galleryGrid = document.querySelector(".gallery-grid");
+let galleryItems = [];
+
+function makeItem(pic) {
+  const btn = document.createElement("button");
+  btn.className = "g-item reveal";
+  btn.dataset.src = pic.full;
+  btn.ratio = pic.h / pic.w;
+  const img = document.createElement("img");
+  img.src = pic.thumb;
+  img.alt = "もいもいのイラスト";
+  img.loading = "lazy";
+  img.width = pic.w;
+  img.height = pic.h;
+  btn.appendChild(img);
+  return btn;
+}
+
+// 画像を「いちばん短い列」に順番に入れていく（列ごとの長さがそろって隙間ができない）
+let galleryCols = 0;
+
+function layoutGallery() {
+  const width = galleryGrid.clientWidth;
+  const count = width < 560 ? 2 : width < 860 ? 3 : 4;
+  if (count === galleryCols) return;
+  galleryCols = count;
+
+  const cols = Array.from({ length: count }, () => {
+    const col = document.createElement("div");
+    col.className = "g-col";
+    return col;
+  });
+  const heights = new Array(count).fill(0);
+  galleryItems.forEach((item) => {
+    const i = heights.indexOf(Math.min(...heights));
+    cols[i].appendChild(item);
+    heights[i] += item.ratio + 0.1; // 0.1 は枠と隙間のぶん
+  });
+  galleryGrid.replaceChildren(...cols);
+}
+
+if (galleryGrid) {
+  const all = [...galleryData.pickup, ...galleryData.more];
+  let list = galleryGrid.dataset.show === "all" ? all : galleryData.pickup;
+  if (list.length === 0) list = all.slice(0, 8); // ピックアップが空なら先頭8枚を出す
+
+  galleryItems = list.map(makeItem);
+  layoutGallery();
+  window.addEventListener("resize", layoutGallery);
+
+  const moreSub = document.querySelector(".more-sub");
+  if (moreSub) moreSub.textContent = `全${all.length}枚を見る`;
+
+  const countEl = document.querySelector(".gallery-count");
+  if (countEl) countEl.textContent = `全${all.length}枚`;
+}
+
 // ---------- スクロールで要素がぽよんと出てくる ----------
 const reveals = document.querySelectorAll(".reveal");
 
@@ -60,56 +122,47 @@ if ("IntersectionObserver" in window && !reduceMotion) {
   reveals.forEach((el) => el.classList.add("is-in"));
 }
 
-// ---------- ギャラリーのMOREボタン ----------
-const galleryExtra = document.querySelector(".gallery-extra");
-const moreBtn = document.querySelector(".more-btn");
-const moreSub = moreBtn.querySelector(".more-sub");
-const moreLabel = moreBtn.querySelector(".more-label");
-const extraCount = galleryExtra.querySelectorAll(".g-item").length;
+// ---------- 動画のタブ（新着／配信アーカイブ／ショート） ----------
+const movieFrame = document.querySelector(".movie-frame iframe");
 
-moreSub.textContent = `もっと見る（+${extraCount}枚）`;
-
-moreBtn.addEventListener("click", () => {
-  const open = galleryExtra.classList.toggle("is-open");
-  moreBtn.setAttribute("aria-expanded", open);
-  moreLabel.textContent = open ? "CLOSE" : "MORE";
-  moreSub.textContent = open ? "とじる" : `もっと見る（+${extraCount}枚）`;
-  if (!open) document.getElementById("gallery").scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
-});
-
-// ---------- ギャラリーの拡大表示 ----------
-const lightbox = document.querySelector(".lightbox");
-const lbImg = lightbox.querySelector("img");
-const allItems = [...document.querySelectorAll(".g-item")];
-let items = allItems;
-let current = 0;
-
-function show(index) {
-  current = (index + items.length) % items.length;
-  const img = items[current].querySelector("img");
-  lbImg.src = items[current].dataset.src;
-  lbImg.alt = img.alt;
-}
-
-allItems.forEach((item) =>
-  item.addEventListener("click", () => {
-    // 今見えている画像だけを前後に切り替える
-    items = allItems.filter((el) => el.offsetParent !== null);
-    show(items.indexOf(item));
-    lightbox.showModal();
+document.querySelectorAll(".movie-tabs button").forEach((tab, _, tabs) =>
+  tab.addEventListener("click", () => {
+    tabs.forEach((t) => t.setAttribute("aria-selected", t === tab));
+    movieFrame.src = `https://www.youtube-nocookie.com/embed/videoseries?list=${tab.dataset.list}`;
   })
 );
 
-lightbox.querySelector(".lb-close").addEventListener("click", () => lightbox.close());
-lightbox.querySelector(".lb-prev").addEventListener("click", () => show(current - 1));
-lightbox.querySelector(".lb-next").addEventListener("click", () => show(current + 1));
+// ---------- ギャラリーの拡大表示 ----------
+const lightbox = document.querySelector(".lightbox");
 
-// 背景クリックで閉じる
-lightbox.addEventListener("click", (e) => {
-  if (e.target === lightbox) lightbox.close();
-});
+if (lightbox) {
+  const lbImg = lightbox.querySelector("img");
+  let current = 0;
 
-lightbox.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowLeft") show(current - 1);
-  if (e.key === "ArrowRight") show(current + 1);
-});
+  const show = (index) => {
+    current = (index + galleryItems.length) % galleryItems.length;
+    lbImg.src = galleryItems[current].dataset.src;
+    lbImg.alt = galleryItems[current].querySelector("img").alt;
+  };
+
+  galleryItems.forEach((item, i) =>
+    item.addEventListener("click", () => {
+      show(i);
+      lightbox.showModal();
+    })
+  );
+
+  lightbox.querySelector(".lb-close").addEventListener("click", () => lightbox.close());
+  lightbox.querySelector(".lb-prev").addEventListener("click", () => show(current - 1));
+  lightbox.querySelector(".lb-next").addEventListener("click", () => show(current + 1));
+
+  // 背景クリックで閉じる
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) lightbox.close();
+  });
+
+  lightbox.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") show(current - 1);
+    if (e.key === "ArrowRight") show(current + 1);
+  });
+}
