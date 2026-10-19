@@ -28,6 +28,10 @@
 
 html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
+/* スクロールバーを隠す（スクロール自体はできる） */
+* { scrollbar-width: none; -ms-overflow-style: none; }
+*::-webkit-scrollbar { display: none; }
+
 body {
   font-family: var(--font-body);
   color: var(--ink);
