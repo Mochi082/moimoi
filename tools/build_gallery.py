@@ -31,6 +31,7 @@ DATA_JS = ROOT / "js" / "gallery-data.js"
 EXTS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 THUMB_PX = 700    # 一覧に並べる画像の長辺
 FULL_PX = 1600    # 拡大表示の画像の長辺
+BG = (255, 255, 255)  # 透過している部分はこの色（白）で塗りつぶす
 
 
 def natural_key(path):
@@ -52,7 +53,8 @@ def save_webp(im, size, dest):
 
 
 def process(path, used):
-    key = hashlib.sha1(path.read_bytes()).hexdigest()[:12]
+    # 背景色もファイル名に反映させる（色を変えたら作り直され、ブラウザにも新しい画像が読まれる）
+    key = hashlib.sha1(path.read_bytes() + bytes(BG)).hexdigest()[:12]
     thumb = THUMBS / f"{key}-s.webp"
     full = THUMBS / f"{key}-l.webp"
     used.update({thumb.name, full.name})
@@ -64,7 +66,12 @@ def process(path, used):
         with Image.open(path) as im:
             im = ImageOps.exif_transpose(im)
             has_alpha = im.mode in ("RGBA", "LA") or (im.mode == "P" and "transparency" in im.info)
-            im = im.convert("RGBA" if has_alpha else "RGB")
+            if has_alpha:
+                rgba = im.convert("RGBA")
+                im = Image.new("RGB", rgba.size, BG)
+                im.paste(rgba, mask=rgba.getchannel("A"))
+            else:
+                im = im.convert("RGB")
             w, h = save_webp(im, THUMB_PX, thumb)
             save_webp(im, FULL_PX, full)
         print(f"  作成: {path.relative_to(GALLERY)}")
