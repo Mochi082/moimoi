@@ -618,6 +618,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .link-card:hover { transform: translateY(-6px) rotate(-1.5deg); box-shadow: 0 14px 0 var(--c); }
 .lc-yt { --c: #FF4E45; }
 .lc-x { --c: #333; }
+.lc-shop { --c: var(--sun-deep); }
+.lc-wish { --c: var(--hy-pink); }
 .lc-icon {
   width: 72px; height: 72px;
   display: grid;
@@ -709,6 +711,73 @@ button { font: inherit; color: inherit; cursor: pointer; }
 .gallery-page .section-sub { margin-top: 0; }
 .more-btn { text-decoration: none; color: inherit; }
 .more-sub-back { font-weight: 700; color: var(--ink-soft); }
+
+/* ---------- 最新情報（Xの埋め込み） ---------- */
+/* タイムラインも、読み込み中のくるくるも画面の真ん中に置く */
+.x-timeline {
+  width: min(600px, 100%);
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+.x-timeline > .twitter-timeline { flex: 1; display: flex; justify-content: center; }
+
+/* ---------- グッズ ---------- */
+.goods { padding-top: 60px; }
+.goods .section-sub { margin-top: 0; }
+.goods-tabs {
+  width: min(1000px, 100%);
+  margin: 0 auto 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  z-index: 2;
+}
+.goods-tabs button {
+  font-family: var(--font-round);
+  font-weight: 800;
+  font-size: .9rem;
+  padding: 6px 16px;
+  border-radius: 999px;
+  border: 3px solid var(--sun-deep);
+  background: var(--white);
+  color: var(--ink);
+  transition: background .2s, color .2s, transform .2s;
+}
+.goods-tabs button:hover { transform: translateY(-2px); }
+.goods-tabs button[aria-selected="true"] { background: var(--sun-deep); color: #fff; }
+
+.goods-grid {
+  width: min(1100px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+  position: relative;
+  z-index: 2;
+}
+.goods-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border: 3px solid #F3E3BC;
+  border-radius: 18px;
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform .2s, box-shadow .2s;
+  animation: pop .4s ease;
+}
+.goods-card:hover { transform: translateY(-4px); box-shadow: 0 8px 0 var(--sun); }
+.gc-img { aspect-ratio: 1; background: #fff; }
+.gc-img img { width: 100%; height: 100%; object-fit: contain; }
+.gc-kind { padding: 8px 12px 0; font-weight: 700; font-size: .9rem; line-height: 1.4; }
+.gc-price { padding: 2px 12px 10px; font-family: var(--font-round); font-weight: 900; color: var(--sun-deep); }
+.gc-price small { font-size: .75em; margin-left: 2px; }
+.goods-note { text-align: center; margin-top: 20px; font-size: .85rem; color: var(--ink-soft); position: relative; z-index: 2; }
 
 /* ---------- フッター ---------- */
 .site-footer { background: var(--sun-pale); }
@@ -858,13 +927,18 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
   .gallery { border-radius: 36px 36px 0 0; }
   .gallery-grid, .g-col { gap: 10px; }
+  .goods-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  /* デザインが多いので、スマホでは横にスクロールして選ぶ */
+  .goods-tabs { width: auto; flex-wrap: nowrap; justify-content: flex-start; overflow-x: auto; margin-inline: -16px; padding: 4px 16px 8px; }
+  .goods-tabs button { flex-shrink: 0; }
   .g-item { border-width: 3px; border-radius: 14px; }
 
   .link-cards { grid-template-columns: 1fr; }
   .link-card { flex-direction: row; justify-content: flex-start; gap: 14px; padding: 16px 20px; }
-  .lc-icon { width: 56px; height: 56px; margin: 0; }
+  .lc-icon { width: 56px; height: 56px; margin: 0; flex-shrink: 0; }
+  .lc-name { white-space: nowrap; }
   .lc-icon svg { width: 30px; height: 30px; }
-  .lc-id { margin-left: auto; font-size: .85rem; }
+  .lc-id { margin-left: auto; font-size: .85rem; text-align: right; line-height: 1.4; }
 
   .lb-nav { top: auto; bottom: 16px; transform: none; }
   .lb-prev { left: calc(50% - 64px); }
