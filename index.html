@@ -34,11 +34,9 @@
     </button>
     <nav id="nav" class="nav">
       <a href="#profile">プロフィール</a>
-      <a href="#movie">動画</a>
-      <a href="#news">ニュース</a>
-      <a href="schedule.html">スケジュール</a>
-      <a href="gallery.html">ギャラリー</a>
       <a href="#links">リンク</a>
+      <a href="#movie">動画</a>
+      <a href="gallery.html">ギャラリー</a>
     </nav>
   </header>
 
@@ -56,15 +54,12 @@
 
       <div class="hero-inner">
         <div class="hero-text">
-          <p class="onair"><i></i>ON AIR</p>
+          <!-- 押すとYouTubeの配信ページへ（配信中ならその配信、していなければ予定やチャンネルが出ます） -->
+          <a class="onair" href="https://www.youtube.com/@%E3%82%82%E3%81%84%E3%82%82%E3%81%84024/live" target="_blank" rel="noopener" aria-label="YouTubeの配信ページを開く"><i></i>ON AIR</a>
           <h1 class="title" aria-label="もいもい">
             <span>も</span><span>い</span><span>も</span><span>い</span>
           </h1>
           <p class="title-en">FMmoimoi</p>
-          <p class="catch">ひまわりみたいに元気いっぱい！<br>今日も<b>FMもいもい</b>、放送中です☀</p>
-          <div class="hero-btns">
-            <a class="btn btn-sub" href="#profile">もいもいって？</a>
-          </div>
         </div>
         <div class="hero-visual">
           <div class="hero-circle"></div>
@@ -138,6 +133,25 @@
       </div>
     </section>
 
+    <!-- ===== リンク ===== -->
+    <section id="links" class="section links">
+      <h2 class="section-title"><span class="en">LINKS</span>リンク</h2>
+      <p class="section-sub">フォロー・チャンネル登録よろしくね！</p>
+
+      <div class="link-cards">
+        <a class="link-card lc-yt reveal" href="https://www.youtube.com/@%E3%82%82%E3%81%84%E3%82%82%E3%81%84024" target="_blank" rel="noopener">
+          <span class="lc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8ZM9.7 15V9l5.8 3-5.8 3Z"/></svg></span>
+          <span class="lc-name">YouTube</span>
+          <span class="lc-id">@もいもい024</span>
+        </a>
+        <a class="link-card lc-x reveal" href="https://x.com/moymoyradio" target="_blank" rel="noopener">
+          <span class="lc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4 5.5-6.4Zm-1.2 17.9h1.9L7 4.2H5l12 16Z"/></svg></span>
+          <span class="lc-name">X</span>
+          <span class="lc-id">@moymoyradio</span>
+        </a>
+      </div>
+    </section>
+
     <!-- ===== 最新動画・アーカイブ ===== -->
     <section id="movie" class="section movie">
       <svg class="spin-flower movie-sf" aria-hidden="true"><use href="#sunflower"/></svg>
@@ -157,24 +171,6 @@
                   referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
-    </section>
-
-    <!-- ===== ニュース ===== -->
-    <section id="news" class="section news">
-      <h2 class="section-title"><span class="en">NEWS</span>ニュース</h2>
-
-      <!--
-        ↓ お知らせは上に足していくと新しい順になります。1件 = <li>〜</li>
-          タグの種類： tag-info（お知らせ） tag-live（配信） tag-goods（グッズ） tag-event（イベント）
-          リンクを付けたいときは、<p> の中を <a href="URL">〜</a> で囲んでください
-      -->
-      <ul class="news-list reveal">
-        <li>
-          <time datetime="2026-10-16">2026.10.16</time>
-          <span class="news-tag tag-info">お知らせ</span>
-          <p>公式サイトをオープンしました！</p>
-        </li>
-      </ul>
     </section>
 
     <!-- ===== ギャラリー ===== -->
@@ -197,29 +193,6 @@
       </div>
     </section>
 
-    <!-- ===== リンク ===== -->
-    <section id="links" class="section links">
-      <h2 class="section-title"><span class="en">LINKS</span>リンク</h2>
-      <p class="section-sub">フォロー・チャンネル登録よろしくね！</p>
-
-      <div class="link-cards">
-        <a class="link-card lc-yt reveal" href="https://www.youtube.com/@%E3%82%82%E3%81%84%E3%82%82%E3%81%84024" target="_blank" rel="noopener">
-          <span class="lc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8ZM9.7 15V9l5.8 3-5.8 3Z"/></svg></span>
-          <span class="lc-name">YouTube</span>
-          <span class="lc-id">@もいもい024</span>
-        </a>
-        <a class="link-card lc-x reveal" href="https://x.com/moymoyradio" target="_blank" rel="noopener">
-          <span class="lc-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4 5.5-6.4Zm-1.2 17.9h1.9L7 4.2H5l12 16Z"/></svg></span>
-          <span class="lc-name">X</span>
-          <span class="lc-id">@moymoyradio</span>
-        </a>
-      </div>
-
-      <div class="sticker reveal">
-        <img src="images/top/sticker.webp" alt="もいもいのステッカー" width="900" height="578" loading="lazy">
-      </div>
-    </section>
-
   </main>
 
   <!-- ===== フッター ===== -->
@@ -237,6 +210,10 @@
         <img src="images/top/icon.webp" alt="" width="44" height="44">
         <span>FM<b>moimoi</b></span>
       </a>
+      <div class="footer-sns">
+        <a href="https://www.youtube.com/@%E3%82%82%E3%81%84%E3%82%82%E3%81%84024" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8ZM9.7 15V9l5.8 3-5.8 3Z"/></svg></a>
+        <a href="https://x.com/moymoyradio" target="_blank" rel="noopener" aria-label="X"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.2 2.3h3.4l-7.4 8.4 8.7 11.5h-6.8l-5.3-7-6.1 7H1.3l7.9-9L.9 2.3h7l4.8 6.4 5.5-6.4Zm-1.2 17.9h1.9L7 4.2H5l12 16Z"/></svg></a>
+      </div>
       <p class="copy">©MOCHI</p>
       <a class="to-top" href="#top">▲ TOP</a>
     </div>
