@@ -166,25 +166,3 @@ if (lightbox) {
     if (e.key === "ArrowRight") show(current + 1);
   });
 }
-
-// ---------- iPhoneの画面の上下（時計やURLバーのところ）の色 ----------
-// iOS 26のSafariは、画面の上下の端にある不透明な固定要素の色でバーを塗る。
-// 上は空が見えている間は空色、下はフッターが見えている間は緑、それ以外はクリーム色にする
-const edgeTop = document.querySelector(".edge-top");
-const edgeBottom = document.querySelector(".edge-bottom");
-const skyTop = document.querySelector(".hero, .page-hero");
-const footerBody = document.querySelector(".footer-body");
-
-function updateEdgeTint() {
-  const sky = skyTop && skyTop.getBoundingClientRect().bottom > 80;
-  const footer = footerBody && footerBody.getBoundingClientRect().top < window.innerHeight - 20;
-  // スタイルシートの切り替えだと反映されないことがあるので、直接色を書き込む
-  if (edgeTop) edgeTop.style.backgroundColor = sky ? "#9FD8FF" : "#FFFCEE";
-  if (edgeBottom) edgeBottom.style.backgroundColor = footer ? "#62B04A" : "#FFFCEE";
-}
-
-if (edgeTop || edgeBottom) {
-  updateEdgeTint();
-  window.addEventListener("scroll", updateEdgeTint, { passive: true });
-  window.addEventListener("resize", updateEdgeTint);
-}

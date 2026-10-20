@@ -26,8 +26,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 * { margin: 0; padding: 0; }
 
-/* 背景色はiPhoneのSafariが一番上にいるときの時計まわりの色に使うので、トップの空の色にする（ページ自体は body の色） */
-html { scroll-behavior: smooth; scroll-padding-top: 80px; background-color: #9FD8FF; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
 
 /* スクロールバーを隠す（スクロール自体はできる） */
 * { scrollbar-width: none; -ms-overflow-style: none; }
@@ -45,21 +44,6 @@ body {
 
 /* 斜めの帯などが横にはみ出した分を切り取る（iPhoneは body だけだと横にずらせてしまうため） */
 main { overflow-x: hidden; overflow-x: clip; }
-
-/* iPhoneの画面の上下（時計やURLバーのところ）の色を決める帯。iPhone・iPadのSafariだけで表示する */
-.edge-tint {
-  display: none;
-  position: fixed;
-  left: 0; right: 0;
-  z-index: 45;
-  pointer-events: none;
-  background-color: var(--cream);
-}
-@supports (-webkit-touch-callout: none) {
-  .edge-tint { display: block; }
-  .edge-top { top: 0; height: max(4px, env(safe-area-inset-top)); }
-  .edge-bottom { bottom: 0; height: max(4px, env(safe-area-inset-bottom)); }
-}
 
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; }
