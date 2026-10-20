@@ -440,6 +440,42 @@ button { font: inherit; color: inherit; cursor: pointer; }
   border-bottom: 2px dotted #E8DFC8;
 }
 
+/* お母様・お父様（ギャラリーのMOREの下） */
+.credit-card {
+  width: min(620px, 100%);
+  margin: 48px auto 0;
+  background: var(--white);
+  border: 4px solid var(--hy-purple);
+  border-radius: var(--radius);
+  box-shadow: 8px 8px 0 var(--hy-purple);
+  padding: 20px 28px;
+  position: relative;
+  z-index: 2;
+}
+.profile-credit {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px 14px;
+  align-items: baseline;
+}
+.profile-credit dt {
+  font-family: var(--font-round);
+  font-weight: 800;
+  font-size: .85rem;
+  color: #fff;
+  background: var(--hy-purple);
+  padding: 1px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.profile-credit dd { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.profile-credit a {
+  font-weight: 700;
+  color: var(--leaf-deep);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
 .deco-hy-1 { width: 220px; height: 220px; left: -60px; top: 40px; opacity: .9; }
 
 /* ---------- ギャラリー ---------- */
@@ -814,6 +850,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
 
   .section { padding: 72px 16px; }
   .profile-card { padding: 22px 18px; box-shadow: 6px 6px 0 var(--moi); }
+  .credit-card { padding: 18px; box-shadow: 6px 6px 0 var(--hy-purple); }
   .profile-name { font-size: 1.8rem; }
   .deco-hy-1 { width: 140px; height: 140px; left: -50px; top: 20px; }
   .deco-hy-2 { width: 120px; height: 120px; right: -40px; top: 20px; }
