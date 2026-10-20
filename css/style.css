@@ -444,8 +444,18 @@ button { font: inherit; color: inherit; cursor: pointer; }
   padding: 0 4px 8px;
   border-bottom: 2px dotted #E8DFC8;
 }
-/* X のハッシュタグっぽく青くする */
-.hashtag { color: #1D9BF0; }
+/* X のハッシュタグっぽく青くする（押すとコピーできる） */
+.hashtag {
+  color: #1D9BF0;
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: inherit;
+  text-decoration: underline dotted;
+  text-underline-offset: 3px;
+}
+/* 押したあと少しのあいだ「コピーしました！」を横に出す */
+.hashtag.copied::after { content: "コピーしました！"; margin-left: 6px; color: var(--leaf-deep); font-size: .8em; }
 
 /* お母様・お父様（ギャラリーのMOREの下） */
 .credit-card {

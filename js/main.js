@@ -2,6 +2,30 @@
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// ---------- 押すとコピー（ハッシュタグなど） ----------
+// data-copy に書いた文字をコピーして、少しのあいだ「コピーしました！」を出す
+document.querySelectorAll("[data-copy]").forEach((btn) =>
+  btn.addEventListener("click", async () => {
+    const text = btn.dataset.copy;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch {
+      // 古いブラウザ向け：見えない入力欄を使ってコピーする
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      ta.remove();
+    }
+    btn.classList.add("copied");
+    clearTimeout(btn.copiedTimer);
+    btn.copiedTimer = setTimeout(() => btn.classList.remove("copied"), 1500);
+  })
+);
+
 // ---------- 画像の保存をしにくくする ----------
 // 画像の上では右クリック・長押しのメニューを出さず、ドラッグもさせない（スクショなどは防げない）
 ["contextmenu", "dragstart"].forEach((type) =>
