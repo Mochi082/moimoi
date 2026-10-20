@@ -46,6 +46,8 @@ body {
 main { overflow-x: hidden; overflow-x: clip; }
 
 img { max-width: 100%; height: auto; display: block; }
+/* 画像の長押しメニュー（iPhone）・ドラッグ・選択をさせない（気軽な保存を防ぐ。完全には防げない） */
+img { -webkit-touch-callout: none; -webkit-user-drag: none; user-select: none; -webkit-user-select: none; }
 a { color: inherit; }
 button { font: inherit; color: inherit; cursor: pointer; }
 

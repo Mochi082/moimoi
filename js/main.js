@@ -2,6 +2,14 @@
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+// ---------- 画像の保存をしにくくする ----------
+// 画像の上では右クリック・長押しのメニューを出さず、ドラッグもさせない（スクショなどは防げない）
+["contextmenu", "dragstart"].forEach((type) =>
+  document.addEventListener(type, (e) => {
+    if (e.target.closest("img, .g-item")) e.preventDefault();
+  })
+);
+
 // ---------- スマホメニュー ----------
 const menuBtn = document.querySelector(".menu-btn");
 const nav = document.querySelector(".nav");
