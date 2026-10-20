@@ -442,6 +442,8 @@ button { font: inherit; color: inherit; cursor: pointer; }
   padding: 0 4px 8px;
   border-bottom: 2px dotted #E8DFC8;
 }
+/* X のハッシュタグっぽく青くする */
+.hashtag { color: #1D9BF0; }
 
 /* お母様・お父様（ギャラリーのMOREの下） */
 .credit-card {
