@@ -453,7 +453,12 @@ button { font: inherit; color: inherit; cursor: pointer; }
   font-weight: inherit;
   text-decoration: underline dotted;
   text-underline-offset: 3px;
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent; /* スマホで押したときのグレーを出さない */
 }
+.hashtag:focus { outline: none; }
+.hashtag:focus-visible { outline: 2px solid #1D9BF0; outline-offset: 2px; border-radius: 4px; }
 /* 押したあと少しのあいだ「コピーしました！」を横に出す */
 .hashtag.copied::after { content: "コピーしました！"; margin-left: 6px; color: var(--leaf-deep); font-size: .8em; }
 
