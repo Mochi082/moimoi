@@ -723,7 +723,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   justify-content: center;
   align-items: flex-end;
   gap: 6px;
-  height: 130px;
+  height: 180px;
   overflow: hidden;
 }
 .footer-flowers .hy { position: static; width: 110px; height: 110px; margin-bottom: -16px; }
@@ -878,6 +878,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   .lb-prev { left: calc(50% - 64px); }
   .lb-next { right: calc(50% - 64px); }
 
+  .footer-flowers { height: 130px; }
   .footer-flowers .hy { width: 80px; height: 80px; }
   .footer-flowers .fp { width: 44px; height: 114px; }
 }
